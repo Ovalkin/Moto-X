@@ -10,8 +10,8 @@
 
 <div class="wrapper">
     <header class="header">
-        @include('navBar')
-        @include('navUnderLine')
+        @include('header.navBar')
+        @include('header.navUnderLine')
     </header>
 
     <main class="main py-0 fs-5">

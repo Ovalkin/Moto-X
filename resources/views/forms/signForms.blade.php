@@ -1,30 +1,3 @@
-@php use App\Http\Controllers\UserController; @endphp
-<nav class="navbar p-1 navbar-expand-lg bg-body-tertiary navbar bg-primary" data-bs-theme="dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Мотики</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Главная</a>
-                </li>
-            </ul>
-            <form class="d-flex w-25" role="search">
-                <input class="form-control me-2" type="search" placeholder="Поиск по товарам" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Поиск</button>
-            </form>
-
-            @include('notAut')
-
-        </div>
-    </div>
-</nav>
-
 <div class="modal fade" id="registrationForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -33,7 +6,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post">
+                <form method="post" action="/signup">
+                    @csrf
                     <div class="mb-2">
                         <label for="exampleInputName1" class="form-label">Имя</label>
                         <input name="name" type="text" class="form-control" id="exampleInputName1"
@@ -46,8 +20,8 @@
                     </div>
                     <div class="mb-2">
                         <label for="exampleInputLastname1" class="form-label">Отчество</label>
-                        <input name="Lastname" type="text" class="form-control" id="exampleInputLastname1"
-                               aria-describedby="LastnameHelp">
+                        <input name="lastname" type="text" class="form-control" id="exampleInputLastname1"
+                               aria-describedby="lastnameHelp">
                     </div>
                     <div class="mb-2">
                         <label for="exampleInputPhone1" class="form-label">Номер телефона</label>
@@ -77,6 +51,8 @@
         </div>
     </div>
 </div>
+
+
 <div class="modal fade" id="loginForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -97,7 +73,7 @@
                         <input name="password" type="password" class="form-control" id="exampleInputPassword1">
                     </div>
                     <div class="mb-2 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remember">
                         <label class="form-check-label" for="exampleCheck1">Запомнить меня</label>
                     </div>
                     <div class="d-grid gap-2">
@@ -107,16 +83,5 @@
                 </form>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
-     aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">ХАХАХАХАХААХАХАХАХАХА</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        РЛОРОЛЛО
     </div>
 </div>
