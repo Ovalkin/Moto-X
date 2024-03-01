@@ -14,11 +14,15 @@ class User extends Model
     public function signin($signinData)
     {
         $user = User::query()->select('*')
-            ->where('email', '=', $signinData['email'])->get();
+            ->where('email', '=', $signinData['email'])
+            ->get();
 
-        if (password_verify($signinData['password'], $user[0]['password'])) {
-            return $user[0];
-        } else return false;
+        if (empty($user[0])) return false;
+        else {
+            if (password_verify($signinData['password'], $user[0]['password'])) {
+                return $user[0];
+            } else return false;
+        }
     }
 
     public function signup($signupData): bool
@@ -42,5 +46,18 @@ class User extends Model
             if ($phone == $inputPhone) return false;
         }
         return true;
+    }
+
+    public function returnUserData(): array|bool
+    {
+        if(empty($_COOKIE['aut_user'])) return false;
+        $userId = unserialize($_COOKIE['aut_user']);
+
+        $userData = User::query()->select('*')
+            ->where('id', '=', $userId['id'])
+            ->get()
+            ->toArray();
+
+        return $userData[0];
     }
 }

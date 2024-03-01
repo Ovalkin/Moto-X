@@ -10,8 +10,25 @@
         </button>
     </li>
     <li class="nav-item me-2">
-        <button type="button" class="btn btn btn-outline-dark" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">{{"Тестов Т. Т."}}
-        </button>
+        <div class="dropdown">
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Аккаунт
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <h6 class="dropdown-header">{{$userData['name'].' '.$userData['surname'].' '.$userData['lastname']}}</h6>
+                </li>
+                <li>
+                    <a class="dropdown-item " type="button">Мои заказы</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" type="button" href="/setting">Настройка профиля</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" type="button" href="/signout">Выйти</a>
+                </li>
+            </ul>
+        </div>
     </li>
 </ul>

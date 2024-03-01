@@ -14,9 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UserController::class, 'index'])->name('/');
-Route::get('/test', [UserController::class, 'index'])->name('test');
+Route::get('/', [UserController::class, "index"])->name('/');
+Route::get('/motorcycles', [UserController::class, 'index'])->name('motorcycles');
+Route::get('/equipment', [UserController::class, 'index'])->name('equipment');
+Route::get('/accessories', [UserController::class, 'index'])->name('accessories');
+Route::get('/discounted', [UserController::class, 'index'])->name('discounted');
+Route::get('/setting', [UserController::class, 'setting'])->name('setting');
 
-
-Route::post('/signup', [UserController::class, 'signup']);
-Route::post('/signin', [UserController::class, 'signin']);
+Route::post('/signup', [UserController::class, 'signUp']);
+Route::post('/signin', [UserController::class, 'signIn']);
+Route::get('/signout', [UserController::class, 'signOut']);

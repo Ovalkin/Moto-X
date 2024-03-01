@@ -4,18 +4,19 @@
         <a class="nav-link {{Route::currentRouteName('/') == '/' ? 'active' : '' }}" href="/">Главная</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Мотоциклы</a>
+        <a class="nav-link {{Route::currentRouteName('motorcycles') == 'motorcycles' ? 'active' : '' }}"
+           href="/motorcycles">Мотоциклы</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Экипировка</a>
+        <a class="nav-link {{Route::currentRouteName('equipment') == 'equipment' ? 'active' : '' }}"
+           href="/equipment">Экипировка</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Аксессуары</a>
+        <a class="nav-link {{Route::currentRouteName('accessories') == 'accessories' ? 'active' : '' }}"
+           href="/accessories">Аксессуары</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Уценка</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link {{Route::currentRouteName('test') == 'test' ? 'active' : '' }}" href="/test">Test</a>
+        <a class="nav-link {{Route::currentRouteName('discounted') == 'discounted' ? 'active' : '' }}"
+           href="/discounted">Уценка</a>
     </li>
 </ul>

@@ -13,10 +13,25 @@
     </header>
 
     <main class="main pt-5">
-        @include('layouts.main.carousel')
+        @include('layouts.carousel')
         @include('layouts.tabs')
-
-        @include('layouts.main.mainContent')
+        @switch($page)
+            @case('/')
+                @include('layouts.main.mainContent')
+                @break
+            @case('motorcycles')
+                @include('layouts.main.motorcyclesContent')
+                @break
+            @case('equipment')
+                @include('layouts.main.equipmentContent')
+                @break
+            @case('accessories')
+                @include('layouts.main.accessoriesContent')
+                @break
+            @case('discounted')
+                @include('layouts.main.discountedContent')
+                @break
+        @endswitch
     </main>
 
     <footer class="footer">
