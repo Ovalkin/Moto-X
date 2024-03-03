@@ -14,13 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UserController::class, "index"])->name('/');
-Route::get('/motorcycles', [UserController::class, 'index'])->name('motorcycles');
-Route::get('/equipment', [UserController::class, 'index'])->name('equipment');
-Route::get('/accessories', [UserController::class, 'index'])->name('accessories');
-Route::get('/discounted', [UserController::class, 'index'])->name('discounted');
 Route::get('/setting', [UserController::class, 'setting'])->name('setting');
+Route::post('/setting/changepass', [UserController::class, 'changePass']);
+Route::post('/setting/changedata', [UserController::class, 'changeData']);
 
 Route::post('/signup', [UserController::class, 'signUp']);
 Route::post('/signin', [UserController::class, 'signIn']);
 Route::get('/signout', [UserController::class, 'signOut']);
+
+Route::get('/{page?}', [UserController::class, "index"])->name('mainPage');

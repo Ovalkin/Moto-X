@@ -13,22 +13,7 @@
     </header>
 
     <main class="main pt-5">
-        <div class="container">
-            <div class="justify-content-center">
-                @foreach($userData as $key=>$value)
-                    @if($key == 'admin' || $key == '_token')
-                        @continue
-                    @endif
-                    <div class="mb-3 row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">{{$key}}</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                   value="{{$value}}">
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
+        @include('userSettingMenu')
     </main>
 
     <footer class="footer">

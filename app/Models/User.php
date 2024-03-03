@@ -15,18 +15,21 @@ class User extends Model
     {
         $user = User::query()->select('*')
             ->where('email', '=', $signinData['email'])
-            ->get();
+            ->get()
+            ->toArray();
 
         if (empty($user[0])) return false;
         else {
-            if (password_verify($signinData['password'], $user[0]['password'])) {
-                return $user[0];
-            } else return false;
+            if (password_verify($signinData['password'], $user[0]['password']))
+                return $user[0]['id'];
+            else
+                return false;
         }
     }
 
     public function signup($signupData): bool
     {
+        $signupData['created_at'] = date('Y-m-d H-i-s');
         return User::query()->insert($signupData);
     }
 
@@ -50,14 +53,38 @@ class User extends Model
 
     public function returnUserData(): array|bool
     {
-        if(empty($_COOKIE['aut_user'])) return false;
-        $userId = unserialize($_COOKIE['aut_user']);
+        if (empty($_COOKIE['aut_user'])) return false;
+        $userId = $_COOKIE['aut_user'];
 
         $userData = User::query()->select('*')
-            ->where('id', '=', $userId['id'])
+            ->where('id', '=', $userId)
             ->get()
             ->toArray();
-
         return $userData[0];
+    }
+
+    public function changePass($newPass)
+    {
+        $userId = $_COOKIE['aut_user'];
+        $updatedAt = date('Y-m-d H-i-s');
+        $newPass = password_hash($newPass, PASSWORD_DEFAULT);
+
+        $changePass = User::query()
+            ->where('id', $userId)
+            ->update(['password' => $newPass,
+                'updated_at' => $updatedAt]);
+
+        return true;
+    }
+
+    public function changeData($data)
+    {
+        $userId = $_COOKIE['aut_user'];
+        unset($data['_token']);
+        $changePass = User::query()
+            ->where('id', $userId)
+            ->update($data);
+
+        return true;
     }
 }

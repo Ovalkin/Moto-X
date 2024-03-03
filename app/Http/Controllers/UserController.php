@@ -7,13 +7,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index($page = '')
     {
-        $user = new User();
-        $user = $user->returnUserData();
-
-        $page = request()->route()->uri();
-        return view('main', ['page' => $page, 'userData' => $user]);
+        return view('main', ['page' => $page]);
     }
 
     public function signIn(Request $request)
@@ -21,14 +17,15 @@ class UserController extends Controller
         $userdata = $request->all();
         $signin = new User();
         $signin = $signin->signin($userdata);
+
         if ($signin) {
-            if (isset($userdata['remember'])) {
-                setcookie('aut_user', serialize($signin), time() + 3600 * 100, "/");
-                return redirect()->to('/');
-            }
-            setcookie('aut_user', serialize($signin), time() + 3600, "/");
-            return redirect()->to('/');
+            if (isset($userdata['remember'])) $time = time() + 3600 * 60;
+            else $time = time() + 3600;
         } else return "Логин или пароль неверные";
+
+        setcookie('aut_user', $signin, $time, "/");
+
+        return redirect()->to('/');
     }
 
     public function signUp(Request $request)
@@ -38,19 +35,23 @@ class UserController extends Controller
             if (empty($value)) dd($value);
         }
         if ($userdata['password'] === $userdata['rePassword']) {
+            unset($userdata['rePassword']);
             $user = new User();
             if ($user->checkEmails($userdata['email'])) {
                 if ($user->checkPhones($userdata['phone'])) {
-                    unset($userdata['rePassword']);
+
                     $signinData['_token'] = $userdata['_token'];
                     $signinData['email'] = $userdata['email'];
                     $signinData['password'] = $userdata['password'];
 
                     $userdata['password'] = password_hash($userdata['password'], PASSWORD_DEFAULT);
                     $user->signup($userdata);
+
                     $signin = Request::create('/signin', 'POST', $signinData);
                     $this->signin($signin);
+
                     return redirect()->to('/');
+
                 } else return "Аккаунт с таким номером телефона уже существует";
             } else return "Аккаунт с такой почтой уже существует";
         } else return "Пароли не совпадают";
@@ -64,8 +65,33 @@ class UserController extends Controller
 
     public function setting()
     {
+        return view('setting');
+    }
+
+    public function changePass(Request $request)
+    {
+        $passwords = $request->all();
+
         $user = new User();
-        $user = $user->returnUserData();
-        return view('setting', ['userData' => $user]);
+        $userData = $user->returnUserData();
+
+        if(password_verify($passwords['nowPassword'], $userData['password'])){
+            $user->changePass($passwords['newPassword']);
+            return redirect()->to('/setting');
+        }
+        else return "Текущий пароль неверный";
+    }
+
+    public function changeData(Request $request)
+    {
+        $data = $request->all();
+        $updatedAt = date('Y-m-d H-i-s');
+        $data['updated_at'] = $updatedAt;
+
+        $user = new User();
+        $user->changeData($data);
+        return redirect()->to('/setting');
     }
 }
+//редактор профиля
+//добавить проверку на присутсвие маила и телефона

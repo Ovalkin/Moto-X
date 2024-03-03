@@ -16,7 +16,7 @@
         @include('layouts.carousel')
         @include('layouts.tabs')
         @switch($page)
-            @case('/')
+            @case('')
                 @include('layouts.main.mainContent')
                 @break
             @case('motorcycles')
