@@ -23,7 +23,7 @@ class UserController extends Controller
             else $time = time() + 3600;
         } else return "Логин или пароль неверные";
 
-        setcookie('aut_user', $signin, $time, "/");
+        setcookie('aut_user',serialize($signin), $time, "/");
 
         return redirect()->to('/');
     }
@@ -89,9 +89,18 @@ class UserController extends Controller
         $data['updated_at'] = $updatedAt;
 
         $user = new User();
-        $user->changeData($data);
-        return redirect()->to('/setting');
+        if($user->changeData($data)){
+            return redirect()->to('/setting');
+        }
+        else return 'Ошибка';
+    }
+
+    public function test()
+    {
+        $user = new User();
+
+        $data = $user->checkPhones('81231234545');
+        dd($data);
     }
 }
-//редактор профиля
 //добавить проверку на присутсвие маила и телефона

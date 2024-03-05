@@ -19,6 +19,11 @@
                 <li>
                     <h6 class="dropdown-header">{{$userData['name'].' '.$userData['surname'].' '.$userData['lastname']}}</h6>
                 </li>
+                @if($userData['admin'])
+                    <li>
+                        <a class="dropdown-item " type="button" href="/adminpanel">Админ-панель</a>
+                    </li>
+                @endif
                 <li>
                     <a class="dropdown-item " type="button">Мои заказы</a>
                 </li>

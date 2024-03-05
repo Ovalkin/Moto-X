@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,7 @@ Route::post('/setting/changedata', [UserController::class, 'changeData']);
 Route::post('/signup', [UserController::class, 'signUp']);
 Route::post('/signin', [UserController::class, 'signIn']);
 Route::get('/signout', [UserController::class, 'signOut']);
+
+Route::get('/adminpanel/{page?}', [AdminController::class, 'index']);
 
 Route::get('/{page?}', [UserController::class, "index"])->name('mainPage');

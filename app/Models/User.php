@@ -11,6 +11,12 @@ class User extends Model
 
     protected $table = 'users';
 
+    public function signup($signupData): bool
+    {
+        $signupData['created_at'] = date('Y-m-d H-i-s');
+        return User::query()->insert($signupData);
+    }
+
     public function signin($signinData)
     {
         $user = User::query()->select('*')
@@ -27,26 +33,34 @@ class User extends Model
         }
     }
 
-    public function signup($signupData): bool
-    {
-        $signupData['created_at'] = date('Y-m-d H-i-s');
-        return User::query()->insert($signupData);
-    }
-
     public function checkEmails($inputEmail): bool
     {
-        $emails = User::query()->pluck('email');
-        foreach ($emails as $email) {
-            if ($email == $inputEmail) return false;
+        $users = User::query()
+            ->select('*')
+            ->get()
+            ->toArray();
+
+        foreach ($users as $user) {
+            if ($user['email'] == $inputEmail) {
+                if ($user['id'] == unserialize($_COOKIE['aut_user'])) return true;
+                return false;
+            }
         }
         return true;
     }
 
     public function checkPhones($inputPhone): bool
     {
-        $phones = User::query()->pluck('phone');
-        foreach ($phones as $phone) {
-            if ($phone == $inputPhone) return false;
+        $users = User::query()
+            ->select('*')
+            ->get()
+            ->toArray();
+
+        foreach ($users as $user) {
+            if ($user['phone'] == $inputPhone) {
+                if ($user['id'] == unserialize($_COOKIE['aut_user'])) return true;
+                return false;
+            }
         }
         return true;
     }
@@ -54,9 +68,10 @@ class User extends Model
     public function returnUserData(): array|bool
     {
         if (empty($_COOKIE['aut_user'])) return false;
-        $userId = $_COOKIE['aut_user'];
+        $userId = unserialize($_COOKIE['aut_user']);
 
-        $userData = User::query()->select('*')
+        $userData = User::query()
+            ->select('*')
             ->where('id', '=', $userId)
             ->get()
             ->toArray();
@@ -65,11 +80,11 @@ class User extends Model
 
     public function changePass($newPass)
     {
-        $userId = $_COOKIE['aut_user'];
+        $userId = unserialize($_COOKIE['aut_user']);
         $updatedAt = date('Y-m-d H-i-s');
         $newPass = password_hash($newPass, PASSWORD_DEFAULT);
 
-        $changePass = User::query()
+        User::query()
             ->where('id', $userId)
             ->update(['password' => $newPass,
                 'updated_at' => $updatedAt]);
@@ -79,9 +94,12 @@ class User extends Model
 
     public function changeData($data)
     {
-        $userId = $_COOKIE['aut_user'];
+        $userId = unserialize($_COOKIE['aut_user']);
         unset($data['_token']);
-        $changePass = User::query()
+        if (!$this->checkPhones($data['phone'])) return false;
+        if (!$this->checkEmails($data['email'])) return false;
+
+        User::query()
             ->where('id', $userId)
             ->update($data);
 
