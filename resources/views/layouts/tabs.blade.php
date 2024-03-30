@@ -15,8 +15,4 @@
         <a class="nav-link {{$page == 'accessories' ? 'active' : '' }}"
            href="/accessories">Аксессуары</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link {{$page == 'discounted' ? 'active' : '' }}"
-           href="/discounted">Уценка</a>
-    </li>
 </ul>

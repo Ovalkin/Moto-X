@@ -28,9 +28,6 @@
             @case('accessories')
                 @include('layouts.main.accessoriesContent')
                 @break
-            @case('discounted')
-                @include('layouts.main.discountedContent')
-                @break
         @endswitch
     </main>
 

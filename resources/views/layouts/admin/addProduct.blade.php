@@ -8,7 +8,13 @@
     <div class="mb-3 row">
         <label for="category" class="col-sm-2 col-form-label">Категория</label>
         <div class="col-sm-10">
-            <input name="category" type="text" class="form-control" id="category">
+            <select id="category" class="form-select">
+                <option selected>Выберете категорию</option>
+                <option value="motorbike">Мотоцикл</option>
+                <option value="equipment">Экиперовка</option>
+                <option value="accessor">Аксессуар</option>
+            </select>
+{{--            <input name="category" type="text" class="form-control" id="category">--}}
         </div>
     </div>
     <div class="mb-3 row">
