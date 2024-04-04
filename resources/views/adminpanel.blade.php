@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <title>Админ-панель</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
     <link rel="stylesheet" href="https://bootstraptema.ru/plugins/2022/chosen/chosen.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://bootstraptema.ru/plugins/2022/chosen/chosen.jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://bootstraptema.ru/plugins/2022/chosen/chosen.jquery.min.js" type="text/javascript"></script>
 <div class="wrapper">
     <header class="header">
         <div class="container">
             <h1>Админ панель</h1>
+            <h4><a href="/">Вернуться назад</a></h4>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link {{$page == '' ? 'active' : '' }}" href="/adminpanel">Главная</a>

@@ -4,7 +4,7 @@
         <label for="category" class="col-sm-2 col-form-label">Категория</label>
         <div class="col-sm-10">
             <select class="form-select" id="category" name="category">
-                <option></option>
+                <option selected="selected"></option>
                 <option value="motorcycle">Мотоцикл</option>
                 <option value="2">Option 2</option>
             </select>
@@ -41,19 +41,26 @@
         <button type="submit" class="btn btn-outline-dark">Добавить товар</button>
     </div>
 </form>
+
+<style>
+    .block {
+        visibility: hidden ;
+    }
+</style>
+
 <script>
-    $('.chosen').chosen();
     let select = document.getElementById('category');
     let block = document.querySelectorAll('.block');
     let lastIndex = 0; // После каждой смены опции, сохраняем сюда индекс предыдущего блока
 
     select.addEventListener('change', function () {
-        block[lastIndex].style.display = "none";
+        block[lastIndex].style.visibility = "hidden";
         // Чтобы сразу делать именно его невидимым при следующей смене
 
         let index = select.selectedIndex; // Определить индекс выбранной опции
-        block[index].style.display = "block"; // Показать блок с соответствующим индексом
+        block[index].style.visibility = "unset"; // Показать блок с соответствующим индексом
 
         lastIndex = index; // Обновить сохраненный индекс.
     });
+    $('.chosen').chosen();
 </script>

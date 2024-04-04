@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100 z-2 border-bottom">
+<nav class="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100 z-2">
     <div class="container">
         <a class="navbar-brand" href="/">MOTO-X</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

@@ -9,7 +9,25 @@ class UserController extends Controller
 {
     public function index($page = '')
     {
-        return view('main', ['page' => $page]);
+        $returnData = array(
+            'page' => $page
+        );
+        if ($page == 'motorcycles') {
+            $motorcycles = array();
+            for ($i = 0; $i < 11; $i++) {
+                    $motorcycles[$i] = [
+                    'code' => "M-$i",
+                    'name' => 'BMW SD',
+                    'year' => '2006',
+                    'capacity' => '1170',
+                    'class' => 'Турист',
+                    'price' => 1250000
+                ];
+            }
+            $returnData['motorcycles'] = $motorcycles;
+
+        }
+        return view('main', $returnData);
     }
 
     public function signIn(Request $request)
@@ -23,7 +41,7 @@ class UserController extends Controller
             else $time = time() + 3600;
         } else return "Логин или пароль неверные";
 
-        setcookie('aut_user',serialize($signin), $time, "/");
+        setcookie('aut_user', serialize($signin), $time, "/");
 
         return redirect()->to('/');
     }
@@ -75,11 +93,10 @@ class UserController extends Controller
         $user = new User();
         $userData = $user->returnUserData();
 
-        if(password_verify($passwords['nowPassword'], $userData['password'])){
+        if (password_verify($passwords['nowPassword'], $userData['password'])) {
             $user->changePass($passwords['newPassword']);
             return redirect()->to('/setting');
-        }
-        else return "Текущий пароль неверный";
+        } else return "Текущий пароль неверный";
     }
 
     public function changeData(Request $request)
@@ -89,10 +106,9 @@ class UserController extends Controller
         $data['updated_at'] = $updatedAt;
 
         $user = new User();
-        if($user->changeData($data)){
+        if ($user->changeData($data)) {
             return redirect()->to('/setting');
-        }
-        else return 'Ошибка';
+        } else return 'Ошибка';
     }
 
     public function test()
