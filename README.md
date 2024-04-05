@@ -1,6 +1,6 @@
 Для развертывания
 
-'composer install'
+`composer install`
 php artisan key:generat
 php artisan cache:clear
 php artisan migrate
