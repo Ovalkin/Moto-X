@@ -1,6 +1,9 @@
 Для развертывания
 
 \```
+Блок кода
+\```
+\```
 composer install
 \```
 `php artisan key:generat`
