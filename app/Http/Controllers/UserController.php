@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,20 +13,28 @@ class UserController extends Controller
         $returnData = array(
             'page' => $page
         );
-        if ($page == 'motorcycles') {
-            $motorcycles = array();
-            for ($i = 0; $i < 11; $i++) {
-                    $motorcycles[$i] = [
-                    'code' => "M-$i",
-                    'name' => 'BMW SD',
-                    'year' => '2006',
-                    'capacity' => '1170',
-                    'class' => 'Турист',
-                    'price' => 1250000
-                ];
-            }
-            $returnData['motorcycles'] = $motorcycles;
+        $products = new Product();
+        $products = $products->getProducts();
 
+        switch ($page) {
+            case 'motorcycles':
+                $returnMotorcycles = new CategoryController();
+                $returnMotorcycles = $returnMotorcycles->returnMotorcycles($products);
+                $returnData['motorcycles'] = $returnMotorcycles;
+                break;
+            case 'equipment':
+                $returnEquipments = new CategoryController();
+                $returnEquipments = $returnEquipments->returnEquipments($products);
+                $returnData['equipments'] = $returnEquipments;
+                break;
+            case 'accessories':
+                $returnAccessories = new CategoryController();
+                $returnAccessories = $returnAccessories->returnAccessories($products);
+                $returnData['equipments'] = $returnAccessories;
+                break;
+
+            default:
+                break;
         }
         return view('main', $returnData);
     }
@@ -119,4 +128,3 @@ class UserController extends Controller
         dd($data);
     }
 }
-//добавить проверку на присутсвие маила и телефона

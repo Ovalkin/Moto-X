@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accessory;
+use App\Models\Equipment;
 use App\Models\Motorcycle;
 use App\Models\Product;
 use App\Models\User;
@@ -22,6 +24,12 @@ class AdminController extends Controller
             $motorcycles = new Motorcycle();
             $motorcycles = $motorcycles->getMotorcyclesData();
             $returnData['motorcycles'] = $motorcycles;
+            $equipment = new Equipment();
+            $equipment = $equipment->getEquipmentsData();
+            $returnData['equipments'] = $equipment;
+            $accessory = new Accessory();
+            $accessory = $accessory->getAccessoryData();
+            $returnData['accessories'] = $accessory;
         }
         return view('adminpanel', $returnData);
     }
@@ -51,8 +59,8 @@ class AdminController extends Controller
 
         $motorcycleData['created_at'] = date('Y-m-d H-i-s');
 
-        if(!$lastMotorcycle) $lastMotorcycle['id'] = 0;
-        $motorcycleData['code'] = "М-" . $lastMotorcycle['id'] + 1;
+        if (!$lastMotorcycle) $lastMotorcycle['id'] = 0;
+        $motorcycleData['code'] = "МOT -" . $lastMotorcycle['id'] + 1;
         $motorcycleData['photo'] = $request->file('photo')
             ->store('/motorcycle/' . $lastMotorcycle['id'] + 1, 'public');
 
@@ -60,6 +68,41 @@ class AdminController extends Controller
 
 
         dd($motorcycleData);
-        return view('test', ['path' => $motorcycleData['photo']]);
+    }
+
+    function addEquipment(Request $request)
+    {
+        $equipmentData = $request->all();
+        unset($equipmentData['_token']);
+
+        $equipment = new Equipment();
+        $equipments = $equipment->getEquipmentsData();
+        $lastEquipment = end($equipments);
+
+        $equipmentData['created_at'] = date('Y-m-d H-i-s');
+        if (!$lastEquipment) $lastEquipment['id'] = 0;
+        $equipmentData['code'] = "EQ-" . $lastEquipment['id'] + 1;
+        $equipmentData['photo'] = $request->file('photo')
+            ->store('/equipment/' . $lastEquipment['id'] + 1, 'public');
+        $equipment->addEquipment($equipmentData);
+        dd($equipmentData);
+    }
+
+    function addAccessory(Request $request)
+    {
+        $accessoryData = $request->all();
+        unset($accessoryData['_token']);
+
+        $accessory = new Accessory();
+        $accessories = $accessory->getAccessoryData();
+        $lastAccessory = end($accessories);
+
+        $accessoryData['created_at'] = date('Y-m-d H-i-s');
+        if (!$lastAccessory) $lastAccessory['id'] = 0;
+        $accessoryData['code'] = "ACS-" . $lastAccessory['id'] + 1;
+        $accessoryData['photo'] = $request->file('photo')
+            ->store('/accessory/' . $lastAccessory['id'] + 1, 'public');
+        $accessory->addAccessory($accessoryData);
+        dd($accessoryData);
     }
 }

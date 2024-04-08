@@ -26,5 +26,7 @@ Route::get('/signout', [UserController::class, 'signOut']);
 Route::get('/adminpanel/{page?}', [AdminController::class, 'index']);
 Route::post('/adminpanel/add-motorcycles/submit', [AdminController::class, 'addMotorcycle']);
 Route::post('/adminpanel/add-product/submit', [AdminController::class, 'addProduct']);
+Route::post('/adminpanel/add-equipment/submit', [AdminController::class, 'addEquipment']);
+Route::post('/adminpanel/add-accessory/submit', [AdminController::class, 'addAccessory']);
 
 Route::get('/{page?}', [UserController::class, "index"])->name('mainPage');

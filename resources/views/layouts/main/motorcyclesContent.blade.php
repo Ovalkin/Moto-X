@@ -4,12 +4,34 @@
         @foreach($motorcycles as $id=>$motorcycle)
             <div class="col">
                 <div class="card">
-                    <img src="{{asset('images/4.jpg')}}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{$motorcycle['name']}}</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural
-                            lead-in
-                            to additional content. This content is a little bit longer.</p>
+                    <a href="/motorcycle/{{$motorcycle['code']}}" class="text-decoration-none text-black">
+                        <div>
+                            <img src="{{asset('storage/'.$motorcycle['photo'])}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$motorcycle['name']}}</h5>
+                                <div class="d-flex justify-content-between">
+                                    <div>Производитель:</div>
+                                    <div>{{$motorcycle['producer']}}</div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div>Год:</div>
+                                    <div>{{$motorcycle['year']}}</div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div>Ёмкость двигателя:</div>
+                                    <div>{{$motorcycle['capacity']}}</div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div>Класс:</div>
+                                    <div>{{$motorcycle['class']}}</div>
+                                </div>
+                                <h5>{{number_format($motorcycle['price'], 0, '', ' ')}} р.</h5>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="me-2 ms-2 mb-1">
+                        <button type="button" class="btn btn-outline-dark w-100 mb-1">В корзину</button>
+                        <button type="button" class="btn btn-outline-dark w-100">В избранное</button>
                     </div>
                 </div>
             </div>

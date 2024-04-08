@@ -8,17 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Motorcycle extends Model
 {
     use HasFactory;
+
     protected $table = 'motorcycles';
 
     public function addMotorcycle($motorcycleData)
     {
-        return Motorcycle::query()->insert($motorcycleData);
+        return Motorcycle::query()
+            ->insert($motorcycleData);
     }
+
     public function getMotorcyclesData()
     {
         return Motorcycle::query()
-        ->select('*')
-        ->get()
-        ->toArray();
+            ->select('*')
+            ->get()
+            ->toArray();
     }
 }

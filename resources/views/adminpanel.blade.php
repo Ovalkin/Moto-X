@@ -6,7 +6,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <link rel="stylesheet" href="https://bootstraptema.ru/plugins/2022/chosen/chosen.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://bootstraptema.ru/plugins/2022/chosen/chosen.jquery.min.js" type="text/javascript"></script>
 </head>
@@ -26,8 +26,17 @@
                         товар</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{$page == 'add-motorcycles' ? 'active' : '' }}" href="/adminpanel/add-motorcycles">Добавить
+                    <a class="nav-link {{$page == 'add-motorcycles' ? 'active' : '' }}"
+                       href="/adminpanel/add-motorcycles">Добавить
                         мотоцикл</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{$page == 'add-equipment' ? 'active' : '' }}" href="/adminpanel/add-equipment">Добавить
+                        экипировку</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{$page == 'add-accessory' ? 'active' : '' }}" href="/adminpanel/add-accessory">Добавить
+                        аксессуар</a>
                 </li>
             </ul>
         </div>
@@ -44,6 +53,12 @@
                     @break
                 @case('add-motorcycles')
                     @include('layouts.admin.addMotorcycle')
+                    @break
+                @case('add-equipment')
+                    @include('layouts.admin.addEquipment')
+                    @break
+                @case('add-accessory')
+                    @include('layouts.admin.addAccessory')
                     @break
             @endswitch
         </div>

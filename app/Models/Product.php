@@ -15,4 +15,11 @@ class Product extends Model
     {
         return Product::query()->insert($productData);
     }
+    public function getProducts($category = '')
+    {
+        return Product::query()
+            ->select('*')
+            ->get()
+            ->toArray();
+    }
 }
