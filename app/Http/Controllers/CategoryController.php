@@ -9,71 +9,71 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function returnMotorcycles($products)
-    {
-        $motorcycles = new Motorcycle();
-        $motorcycles = $motorcycles->getMotorcyclesData();
-        $returnMotorcycles = array();
-        foreach ($products as $product) {
-            foreach ($motorcycles as $motorcycle) {
-                if ($motorcycle['code'] == $product['code']) {
-                    $returnMotorcycles[] = array(
-                        'photo' => $motorcycle['photo'],
-                        'code' => $motorcycle['code'],
-                        'name' => $motorcycle['name'],
-                        'producer' => $motorcycle['producer'],
-                        'year' => $motorcycle['year'],
-                        'capacity' => $motorcycle['capacity'],
-                        'class' => $motorcycle['class'],
-                        'price' => $product['price']
-                    );
-                }
-            }
-        }
-        return $returnMotorcycles;
-    }
-
-    public function returnEquipments($products)
-    {
-        $equipments = new Equipment();
-        $equipments = $equipments->getEquipmentsData();
-        $returnEquipments = array();
-        foreach ($products as $product){
-            foreach ($equipments as $equipment){
-                if($equipment['code'] == $product['code']){
-                    $returnEquipments[] = array(
-                        'photo' => $equipment['photo'],
-                        'code' => $equipment['code'],
-                        'name' => $equipment['name'],
-                        'category' => $equipment['category'],
-                        'producer' => $equipment['producer'],
-                        'size' => $equipment['size'],
-                        'price' => $product['price']
-                    );
-                }
-            }
-        }
-        return $returnEquipments;
-    }
-    public function returnAccessories($products)
+    public function returnMainContent($products)
     {
         $accessories = new Accessory();
+        $motorcycles = new Motorcycle();
+        $equipments = new Equipment();
         $accessories = $accessories->getAccessoryData();
-        $returnAccessories = array();
-        foreach ($products as $product){
-            foreach ($accessories as $accessory){
-                if($accessory['code'] == $product['code']){
-                    $returnAccessories[] = array(
+        $motorcycles = $motorcycles->getMotorcyclesData();
+        $equipments = $equipments->getEquipmentsData();
+
+        $returnMainContentData = array();
+        foreach ($products as $product) {
+            foreach ($accessories as $accessory) {
+                if ($accessory['code'] == $product['code']) {
+                    $returnMainContentData['Аксессуары'][$accessory['code']] = [
+                        'page' => 'accessories',
                         'photo' => $accessory['photo'],
                         'code' => $accessory['code'],
                         'name' => $accessory['name'],
-                        'category' => $accessory['category'],
-                        'producer' => $accessory['producer'],
-                        'price' => $product['price']
-                    );
+                        'params' => [
+                            'Категория' => $accessory['category'],
+                            'Производитель' => $accessory['producer']
+                        ],
+                        'price' => $product['price'],
+                        'description' => $product['description']
+                    ];
+                }
+            }
+            foreach ($motorcycles as $motorcycle) {
+                if ($motorcycle['code'] == $product['code']) {
+                    $returnMainContentData['Мотоциклы'][$motorcycle['code']] = [
+                        'page' => 'motorcycles',
+                        'photo' => $motorcycle['photo'],
+                        'code' => $motorcycle['code'],
+                        'name' => $motorcycle['name'],
+                        'params' => [
+                            'Производитель' => $motorcycle['producer'],
+                            'Год' => $motorcycle['year'],
+                            'Ёмкость двигателя' => $motorcycle['capacity'],
+                            'Класс' => $motorcycle['class']
+                        ],
+                        'price' => $product['price'],
+                        'description' => $product['description']
+                    ];
+                }
+            }
+            foreach ($equipments as $equipment) {
+                if ($equipment['code'] == $product['code']) {
+                    $returnMainContentData['Экипировка'][$equipment['code']] = [
+                        'page' => 'equipments',
+                        'photo' => $equipment['photo'],
+                        'code' => $equipment['code'],
+                        'name' => $equipment['name'],
+                        'params' => [
+                            'Категория' => $equipment['category'],
+                            'Производитель' => $equipment['producer'],
+                            'Размер' => $equipment['size']
+                        ],
+                        'price' => $product['price'],
+                        'description' => $product['description']
+                    ];
                 }
             }
         }
-        return $returnAccessories;
+
+
+        return $returnMainContentData;
     }
 }

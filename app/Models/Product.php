@@ -15,9 +15,16 @@ class Product extends Model
     {
         return Product::query()->insert($productData);
     }
-    public function getProducts($category = '')
+    public function get($code = '')
     {
-        return Product::query()
+        if ($code != '')
+            return Product::query()
+                ->select('*')
+                ->where('code', '=', $code)
+                ->get()
+                ->toArray();
+        else
+            return Product::query()
             ->select('*')
             ->get()
             ->toArray();

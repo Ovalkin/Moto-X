@@ -8,34 +8,24 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index($page = '')
+    public function index($page = '', $code = '')
     {
+        return view('test');
         $returnData = array(
-            'page' => $page
+            'page' => $page,
+            'code' => $code
         );
         $products = new Product();
-        $products = $products->getProducts();
+        $products = $products->get();
+        $returnMainContent = new CategoryController();
+        $returnMainContent = $returnMainContent->returnMainContent($products);
 
-        switch ($page) {
-            case 'motorcycles':
-                $returnMotorcycles = new CategoryController();
-                $returnMotorcycles = $returnMotorcycles->returnMotorcycles($products);
-                $returnData['motorcycles'] = $returnMotorcycles;
-                break;
-            case 'equipment':
-                $returnEquipments = new CategoryController();
-                $returnEquipments = $returnEquipments->returnEquipments($products);
-                $returnData['equipments'] = $returnEquipments;
-                break;
-            case 'accessories':
-                $returnAccessories = new CategoryController();
-                $returnAccessories = $returnAccessories->returnAccessories($products);
-                $returnData['equipments'] = $returnAccessories;
-                break;
+        if ($page == '') $returnData['mainContent'] = $returnMainContent;
+        elseif ($page == 'motorcycles') $returnData['products'] = $returnMainContent['Мотоциклы'];
+        elseif ($page == 'equipments') $returnData['products'] = $returnMainContent['Экипировка'];
+        elseif ($page == 'accessories') $returnData['products'] = $returnMainContent['Аксессуары'];
+        else return redirect()->to('/');
 
-            default:
-                break;
-        }
         return view('main', $returnData);
     }
 
@@ -120,11 +110,8 @@ class UserController extends Controller
         } else return 'Ошибка';
     }
 
-    public function test()
+    public function motorcyclePage($code = '')
     {
-        $user = new User();
-
-        $data = $user->checkPhones('81231234545');
-        dd($data);
+        return view('motorcyclePage', ['page' =>'dsd']);
     }
 }

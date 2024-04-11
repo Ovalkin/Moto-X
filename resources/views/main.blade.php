@@ -15,20 +15,16 @@
     <main class="main pt-5">
         @include('layouts.carousel')
         @include('layouts.tabs')
-        @switch($page)
-            @case('')
-                @include('layouts.main.mainContent')
-                @break
-            @case('motorcycles')
-                @include('layouts.main.motorcyclesContent')
-                @break
-            @case('equipment')
-                @include('layouts.main.equipmentContent')
-                @break
-            @case('accessories')
-                @include('layouts.main.accessoriesContent')
-                @break
-        @endswitch
+        @if($page != '')
+            @if($code != '')
+                @include('layouts.productPage')
+            @else
+                @include('layouts.main.productsPage')
+            @endif
+        @else
+            @include('layouts.main.mainContent')
+        @endif
+
     </main>
 
     <footer class="footer">

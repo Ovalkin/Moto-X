@@ -1,48 +1,39 @@
-<?php
-
-    $products = [
-        "Мотоциклы" => [
-            "Мотоцикл 1",
-            "Мотоцикл 2",
-            "Мотоцикл 3",
-            "Мотоцикл 4",
-            "Мотоцикл 5"
-        ],
-        "Экипировка" => [
-            "Экипировка 1",
-            "Экипировка 2",
-            "Экипировка 3",
-            "Экипировка 4",
-            "Экипировка 5"
-        ],
-        "Аксессуары" => [
-            "Аксессуар 1",
-            "Аксессуар 2",
-            "Аксессуар 3",
-            "Аксессуар 4",
-            "Аксессуар 5"
-        ]
-    ]
-?>
 <div class="products container mt-2 border-start border-end">
-    @foreach($products as $category=>$product)
+    @foreach($mainContent as $category=>$products)
+            <?php $count = 5 ?>
         <h1>{{$category}}</h1>
         <div class="row row-cols-1 row-cols-md-5 g-4">
-            @for($i = 0; $i < 5; $i++)
+            @foreach($products as $name=>$product)
+                @if($count == 0) @break @endif
+                <?php $count-- ?>
                 <div class="col">
                     <div class="card">
-                        <img src="{{asset('images/4.jpg')}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{$product[$i]}}</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural
-                                lead-in
-                                to additional content. This content is a little bit longer.</p>
+                        <a href="/{{$product['page']}}/{{$product['code']}}" class="text-decoration-none text-black">
+                            <div>
+                                <img src="{{asset('storage/'.$product['photo'])}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-truncate"
+                                        title="{{$product['name']}}">{{$product['name']}}</h5>
+                                    @foreach($product['params'] as $namePar=>$param)
+                                        <div class="d-flex justify-content-between">
+                                            <div>{{$namePar}}:</div>
+                                            <div class="text-truncate"
+                                                 title="{{$param}}">{{$param}}</div>
+                                        </div>
+                                    @endforeach
+                                    <br>
+                                    <h5>{{number_format($product['price'], 0, '', ' ')}} р.</h5>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="me-2 ms-2 mb-1">
+                            <button type="button" class="btn btn-outline-dark w-100 mb-1">В корзину</button>
+                            <button type="button" class="btn btn-outline-dark w-100">В избранное</button>
                         </div>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
-        <hr class="bi-hr">
         <br>
     @endforeach
 </div>

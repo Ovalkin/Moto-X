@@ -8,8 +8,8 @@
            href="/motorcycles">Мотоциклы</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{$page == 'equipment' ? 'active' : '' }}"
-           href="/equipment">Экипировка</a>
+        <a class="nav-link {{$page == 'equipments' ? 'active' : '' }}"
+           href="/equipments">Экипировка</a>
     </li>
     <li class="nav-item">
         <a class="nav-link {{$page == 'accessories' ? 'active' : '' }}"

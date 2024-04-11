@@ -30,3 +30,4 @@ Route::post('/adminpanel/add-equipment/submit', [AdminController::class, 'addEqu
 Route::post('/adminpanel/add-accessory/submit', [AdminController::class, 'addAccessory']);
 
 Route::get('/{page?}', [UserController::class, "index"])->name('mainPage');
+Route::get('/{page?}/{code?}', [UserController::class, 'index']);

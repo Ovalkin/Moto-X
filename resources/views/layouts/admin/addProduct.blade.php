@@ -14,9 +14,9 @@
     <div class="block"></div>
     <div class="block">
         <div class="mb-3 row">
-            <label for="code" class="col-sm-2 col-form-label">Мотоцикл</label>
+            <label for="code" class="col-sm-2 col-form-label">Мотоциклы</label>
             <div class="col-sm-10">
-                <select class="form-control chosen" id="code" name="code">
+                <select class="form-control chosen" id="code" name="codeMotorcycles">
                     <option></option>
                     @foreach($motorcycles as $motorcycle)
                         <option value="{{$motorcycle['code']}}">{{$motorcycle['name']}}</option>
@@ -29,7 +29,7 @@
         <div class="mb-3 row">
             <label for="code" class="col-sm-2 col-form-label">Экипировка</label>
             <div class="col-sm-10">
-                <select class="form-control chosen" id="code" name="code">
+                <select class="form-control chosen" id="code" name="codeEquipments">
                     <option></option>
                     @foreach($equipments as $equipment)
                         <option value="{{$equipment['code']}}">{{$equipment['name']}}</option>
@@ -42,7 +42,7 @@
         <div class="mb-3 row">
             <label for="code" class="col-sm-2 col-form-label">Аксессуары</label>
             <div class="col-sm-10">
-                <select class="form-control chosen" id="code" name="code">
+                <select class="form-control chosen" id="code" name="codeAccessories">
                     <option></option>
                     @foreach($accessories as $accessory)
                         <option value="{{$accessory['code']}}">{{$accessory['name']}}</option>

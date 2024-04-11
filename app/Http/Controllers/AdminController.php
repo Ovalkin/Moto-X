@@ -24,9 +24,9 @@ class AdminController extends Controller
             $motorcycles = new Motorcycle();
             $motorcycles = $motorcycles->getMotorcyclesData();
             $returnData['motorcycles'] = $motorcycles;
-            $equipment = new Equipment();
-            $equipment = $equipment->getEquipmentsData();
-            $returnData['equipments'] = $equipment;
+            $equipments = new Equipment();
+            $equipments = $equipments->getEquipmentsData();
+            $returnData['equipments'] = $equipments;
             $accessory = new Accessory();
             $accessory = $accessory->getAccessoryData();
             $returnData['accessories'] = $accessory;
@@ -40,7 +40,10 @@ class AdminController extends Controller
         $productData = $request->all();
         unset($productData['_token']);
         $productData['created_at'] = date('Y-m-d H-i-s');
-
+        if($productData['codeMotorcycles'] != null) $productData['code'] = $productData['codeMotorcycles'];
+        if($productData['codeEquipments'] != null) $productData['code'] = $productData['codeEquipments'];
+        if($productData['codeAccessories'] != null) $productData['code'] = $productData['codeAccessories'];
+        unset($productData['codeMotorcycles'], $productData['codeEquipments'], $productData['codeAccessories']);
         $addProduct = new Product();
         $addProduct->addProduct($productData);
 
