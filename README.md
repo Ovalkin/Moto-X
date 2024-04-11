@@ -13,6 +13,10 @@ composer install
 php artisan key:generat
 ```
 ```
+php artisan storage:link
+```
+
+```
 php artisan cache:clear
 ```
 ```
