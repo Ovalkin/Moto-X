@@ -19,7 +19,11 @@
             @if($code != '')
                 @include('layouts.productPage')
             @else
-                @include('layouts.main.productsPage')
+                @if($page == 'basket')
+                    @include('test')
+                @else
+                    @include('layouts.main.productsPage')
+                @endif
             @endif
         @else
             @include('layouts.main.mainContent')

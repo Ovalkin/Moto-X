@@ -38,6 +38,10 @@
                     <a class="nav-link {{$page == 'add-accessory' ? 'active' : '' }}" href="/adminpanel/add-accessory">Добавить
                         аксессуар</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{$page == 'edit-product' ? 'active' : '' }}" href="/adminpanel/edit-product">Редактировать
+                        товары</a>
+                </li>
             </ul>
         </div>
     </header>
@@ -60,6 +64,8 @@
                 @case('add-accessory')
                     @include('layouts.admin.addAccessory')
                     @break
+                @case('edit-product')
+                @include('layouts.admin.editProduct')
             @endswitch
         </div>
     </main>

@@ -13,20 +13,34 @@ class Product extends Model
 
     public function addProduct($productData)
     {
-        return Product::query()->insert($productData);
+        return Product::query()
+            ->insert($productData);
     }
-    public function get($code = '')
+
+    public function get($id = '')
     {
-        if ($code != '')
+        if ($id != '')
             return Product::query()
                 ->select('*')
-                ->where('code', '=', $code)
+                ->where('id', '=', $id)
                 ->get()
-                ->toArray();
+                ->toArray()[0];
         else
             return Product::query()
-            ->select('*')
-            ->get()
-            ->toArray();
+                ->select('*')
+                ->get()
+                ->toArray();
+    }
+    public function upd($id, $params)
+    {
+        return Product::query()
+            ->where('id', '=', $id)
+            ->update($params);
+    }
+    public function del($id)
+    {
+        Product::query()
+            ->where('id', '=', $id)
+            ->delete();
     }
 }

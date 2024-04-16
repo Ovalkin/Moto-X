@@ -1,8 +1,6 @@
 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
     <li class="nav-item me-4">
-        <button type="button" class="btn btn btn-outline-dark" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Корзина
-        </button>
+        <a type="button" href="/basket" class="btn btn btn-outline-dark">Корзина</a>
     </li>
     <li class="nav-item me-2">
         <div class="dropdown">

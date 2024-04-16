@@ -10,7 +10,6 @@ class UserController extends Controller
 {
     public function index($page = '', $code = '')
     {
-        return view('test');
         $returnData = array(
             'page' => $page,
             'code' => $code
@@ -108,10 +107,5 @@ class UserController extends Controller
         if ($user->changeData($data)) {
             return redirect()->to('/setting');
         } else return 'Ошибка';
-    }
-
-    public function motorcyclePage($code = '')
-    {
-        return view('motorcyclePage', ['page' =>'dsd']);
     }
 }

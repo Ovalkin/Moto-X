@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,13 @@ Route::post('/adminpanel/add-motorcycles/submit', [AdminController::class, 'addM
 Route::post('/adminpanel/add-product/submit', [AdminController::class, 'addProduct']);
 Route::post('/adminpanel/add-equipment/submit', [AdminController::class, 'addEquipment']);
 Route::post('/adminpanel/add-accessory/submit', [AdminController::class, 'addAccessory']);
+Route::post('/adminpanel/edit-product/edit', [AdminController::class, 'selectProduct']);
+Route::post('/adminpanel/edit-product/edit/submit', [AdminController::class, 'editProduct']);
+
+Route::get('/basket', [BasketController::class, 'index']);
+Route::get('/basket/update', [BasketController::class, 'update']);
+Route::post('/basket/delete', [BasketController::class, 'delete']);
+Route::post('/basket/addProduct', [BasketController::class, 'addProduct']);
 
 Route::get('/{page?}', [UserController::class, "index"])->name('mainPage');
 Route::get('/{page?}/{code?}', [UserController::class, 'index']);

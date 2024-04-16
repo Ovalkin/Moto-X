@@ -17,11 +17,30 @@ class Motorcycle extends Model
             ->insert($motorcycleData);
     }
 
-    public function getMotorcyclesData()
+    public function getMotorcyclesData($code = '')
     {
+        if ($code == '')
         return Motorcycle::query()
             ->select('*')
             ->get()
             ->toArray();
+        else
+            return Motorcycle::query()
+                ->select('*')
+                ->where('code', '=', $code)
+                ->get()
+                ->toArray()[0];
+    }
+    public function upd($id, $params)
+    {
+        return Motorcycle::query()
+            ->where('id', '=', $id)
+            ->update($params);
+    }
+    public function del($id)
+    {
+        Motorcycle::query()
+            ->where('id', '=', $id)
+            ->delete();
     }
 }
