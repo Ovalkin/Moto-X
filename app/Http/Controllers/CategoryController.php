@@ -22,6 +22,11 @@ class CategoryController extends Controller
         $equipments = $equipments->getEquipmentsData();
 
         $returnMainContentData = array();
+
+        if ($accessories == null) $returnMainContentData['Аксессуары'] = null;
+        if ($equipments == null) $returnMainContentData['Экипировка'] = null;
+        if ($motorcycles == null) $returnMainContentData['Мотоциклы'] = null;
+
         foreach ($products as $product) {
             foreach ($accessories as $accessory) {
                 if ($accessory['code'] == $product['code']) {

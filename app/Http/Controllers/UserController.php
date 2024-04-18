@@ -14,10 +14,8 @@ class UserController extends Controller
             'page' => $page,
             'code' => $code
         );
-        $products = new Product();
-        $products = $products->get();
         $returnMainContent = new CategoryController();
-        $returnMainContent = $returnMainContent->returnMainContent($products);
+        $returnMainContent = $returnMainContent->returnMainContent();
 
         if ($page == '') $returnData['mainContent'] = $returnMainContent;
         elseif ($page == 'motorcycles') $returnData['products'] = $returnMainContent['Мотоциклы'];
@@ -47,6 +45,8 @@ class UserController extends Controller
     public function signUp(Request $request)
     {
         $userdata = $request->all();
+        unset($userdata['_token']);
+
         foreach ($userdata as $value) {
             if (empty($value)) dd($value);
         }
@@ -55,8 +55,6 @@ class UserController extends Controller
             $user = new User();
             if ($user->checkEmails($userdata['email'])) {
                 if ($user->checkPhones($userdata['phone'])) {
-
-                    $signinData['_token'] = $userdata['_token'];
                     $signinData['email'] = $userdata['email'];
                     $signinData['password'] = $userdata['password'];
 
