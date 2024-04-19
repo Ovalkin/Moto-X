@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -105,5 +106,39 @@ class UserController extends Controller
         if ($user->changeData($data)) {
             return redirect()->to('/setting');
         } else return 'Ошибка';
+    }
+
+    public function orders()
+    {
+        $returnData = array();
+
+        $order = new Order();
+        $orders = $order->getOrdersForUser(unserialize($_COOKIE['aut_user']));
+
+        $products = new CategoryController();
+        $products = $products->returnMainContent();
+
+        $ordersData = array();
+        foreach ($products as $category){
+            if ($category != null){
+                foreach ($category as $product){
+                    foreach ($orders as $item){
+                        if ($product['id'] == $item['product_id']){
+                            $ordersData[] = [
+                                'id' => $item['id'],
+                                'product_id' => $item['product_id'],
+                                'name' => $product['name'],
+                                'amount' => $item['amount'],
+                                'address' => $item['address'],
+                                'status' => $item['status'],
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+        $returnData['ordersData'] = $ordersData;
+
+        return view('orders', $returnData);
     }
 }

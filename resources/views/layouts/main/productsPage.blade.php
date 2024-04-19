@@ -1,4 +1,4 @@
-<div class="products container mt-2 border-start border-end">
+<div class="products container mt-2 border-start border-end" style="min-height: 1000px">
     <div class="row row-cols-1 row-cols-md-5 g-4">
         @if($products == null)
             <h1>Отсутсвуют</h1>

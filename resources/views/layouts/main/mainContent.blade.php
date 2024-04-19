@@ -1,4 +1,4 @@
-<div class="products container mt-2 border-start border-end" style="min-height: 600px">
+<div class="products container mt-2 border-start border-end" style="min-height: 1000px">
     @foreach($mainContent as $category=>$products)
             <?php $count = 5 ?>
         @if($products == null)

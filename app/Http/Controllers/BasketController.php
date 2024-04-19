@@ -6,6 +6,7 @@ use App\Models\Accessory;
 use App\Models\Basket;
 use App\Models\Equipment;
 use App\Models\Motorcycle;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -84,11 +85,38 @@ class BasketController extends Controller
         $basket->upd($basketData);
         return redirect()->to('/basket');
     }
+
     public function delete(Request $request)
     {
         $id = $request->all()['id'];
         $basket = new Basket();
         $basket->del($id);
         return redirect()->to('/basket');
+    }
+
+    public function makeOrder(Request $request)
+    {
+        $orderData = $request->all();
+        $order = new Order();
+
+        $basket = new Basket();
+        $baskets = $basket->get(unserialize($_COOKIE['aut_user']));
+
+        $orders = [];
+        foreach ($baskets as $product){
+            $orders[] = [
+                'user_id' => $product['user_id'],
+                'product_id' => $product['product_id'],
+                'amount' => $product['amount'],
+                'address' => $orderData['address'],
+                'status' => 'На рассмотрении',
+                'created_at' => date('Y-m-d H-i-s')
+            ];
+            $basket->del($product['id']);
+        }
+        foreach ($orders as $value){
+            $order->add($value);
+        }
+        dd($orders);
     }
 }

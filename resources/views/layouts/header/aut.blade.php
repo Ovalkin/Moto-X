@@ -18,7 +18,7 @@
                     </li>
                 @endif
                 <li>
-                    <a class="dropdown-item " type="button">Мои заказы</a>
+                    <a class="dropdown-item " type="button" href="/orders">Мои заказы</a>
                 </li>
                 <li>
                     <a class="dropdown-item" type="button" href="/setting">Настройка профиля</a>

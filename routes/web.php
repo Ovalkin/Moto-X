@@ -24,6 +24,8 @@ Route::post('/signup', [UserController::class, 'signUp']);
 Route::post('/signin', [UserController::class, 'signIn']);
 Route::get('/signout', [UserController::class, 'signOut']);
 
+Route::get('/orders', [UserController::class, 'orders']);
+
 Route::get('/adminpanel/{page?}', [AdminController::class, 'index']);
 Route::post('/adminpanel/add-motorcycles/submit', [AdminController::class, 'addMotorcycle']);
 Route::post('/adminpanel/add-product/submit', [AdminController::class, 'addProduct']);
@@ -33,6 +35,7 @@ Route::post('/adminpanel/edit-product/edit', [AdminController::class, 'selectPro
 Route::post('/adminpanel/edit-product/edit/submit', [AdminController::class, 'editProduct']);
 
 Route::get('/basket', [BasketController::class, 'index']);
+Route::post('/basket/make-order', [BasketController::class, 'makeOrder']);
 Route::get('/basket/update', [BasketController::class, 'update']);
 Route::post('/basket/delete', [BasketController::class, 'delete']);
 Route::post('/basket/addProduct', [BasketController::class, 'addProduct']);
