@@ -21,6 +21,7 @@
                             <label for="col">Количество</label>
                             <form class="d-flex flex-row" method="get" action="/basket/update">
                                 <input type="hidden" name="basketId" value="{{$product['id']}}">
+                                <input type="hidden" name="productId" value="{{$product['product_id']}}">
                                 <input type="submit" value="-" name="action" id="col">
                                 <input style="width: 50px;" readonly name="count" type="number"
                                        value="{{$product['amount']}}"
@@ -78,7 +79,3 @@
         </form>
     </div>
 </div>
-
-
-<!-- Модальное окно -->
-

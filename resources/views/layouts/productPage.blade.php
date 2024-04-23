@@ -18,10 +18,11 @@
             </div>
             <h2>{{number_format($products[$code]['price'], 0, '', ' ')}} р.</h2>
             <div class="d-grid gap-1">
-                <button class="btn btn-dark" type="button">Добавить в корзину</button>
-                <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">
-                    Купить
-                </button>
+                <form method="post" action="/basket/addProduct">
+                    @csrf
+                    <input name="product_id" readonly type="hidden" value="{{$products[$code]['id']}}">
+                    <input type="submit" class="btn btn-outline-dark w-100 mb-1" value="Добавить в корзину">
+                </form>
             </div>
         </div>
     </div>

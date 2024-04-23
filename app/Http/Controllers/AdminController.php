@@ -36,6 +36,7 @@ class AdminController extends Controller
             $categories = new CategoryController();
             $categories = $categories->returnMainContent();
             foreach ($categories as $category) {
+                if($category == null) continue;
                 foreach ($category as $code) {
                     $products[] = $code;
                 }

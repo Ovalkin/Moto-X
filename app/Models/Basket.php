@@ -31,6 +31,14 @@ class Basket extends Model
                 ->get()
                 ->toArray();
     }
+    public function getById($id)
+    {
+        return Basket::query()
+            ->select('*')
+            ->where('id', '=', $id)
+            ->get()
+            ->toArray()[0];
+    }
 
     public function upd($basketData)
     {

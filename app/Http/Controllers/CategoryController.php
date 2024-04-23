@@ -10,6 +10,28 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function returnOneContent($id){
+        $product = new Product();
+        $product = $product->get($id);
+        switch ($product['category']){
+            case 'equipment':
+                $products = new Equipment();
+                $products = $products->getEquipmentsData($product['code']);
+                break;
+            case 'motorcycle':
+                $products = new Motorcycle();
+                $products = $products->getMotorcyclesData($product['code']);
+                break;
+            case 'accessory':
+                $products = new Accessory();
+                $products = $products->getAccessoryData($product['code']);
+                break;
+            default:
+                break;
+        }
+        $products['price'] = $product['price'];
+        return $products;
+    }
     public function returnMainContent()
     {
         $products = new Product();

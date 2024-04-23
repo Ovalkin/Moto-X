@@ -49,6 +49,7 @@ class BasketController extends Controller
             }
             $basketData[] = [
                 'id' => $item['id'],
+                'product_id' => $product['id'],
                 'photo' => $photoProduct,
                 'name' => $nameProduct,
                 'code' => $product['code'],
@@ -76,12 +77,17 @@ class BasketController extends Controller
     public function update(Request $request)
     {
         $basketData = $request->all();
-        if ($basketData['action'] == '+') {
-            $basketData['count'] += 1;
-        } elseif ($basketData['action'] == '-') {
-            $basketData['count'] -= 1;
-        }
         $basket = new Basket();
+
+        $productData = new CategoryController();
+        $productData = $productData->returnOneContent($basketData['productId']);
+
+        if ($basketData['action'] == '+') {
+            if ($basketData['count'] < $productData['quantity']) $basketData['count'] += 1;
+        } elseif ($basketData['action'] == '-') {
+            if ($basketData['count'] > 1) $basketData['count'] -= 1;
+        }
+
         $basket->upd($basketData);
         return redirect()->to('/basket');
     }

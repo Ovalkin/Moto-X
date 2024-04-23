@@ -40,7 +40,6 @@
                                         <input name="product_id" readonly type="hidden" value="{{$product['id']}}">
                                         <input type="submit" class="btn btn-outline-dark w-100 mb-1" value="Добавить в корзину">
                                     </form>
-                                    <button type="button" class="btn btn-outline-dark w-100">В избранное</button>
                                 </div>
                             </div>
                         </div>
