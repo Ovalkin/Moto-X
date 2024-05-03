@@ -11,7 +11,22 @@ dfldlfdl
 composer install
 ```
 ```
-php artisan key:generat
+./vendor/bin/sail up -d
+```
+
+## Внутри докер контейнера
+```
+php artisan migrate
+```
+```
+npm install
+```
+```
+npm run dev
+```
+
+```angular2html
+
 ```
 ```
 php artisan storage:link
@@ -19,9 +34,6 @@ php artisan storage:link
 
 ```
 php artisan cache:clear
-```
-```
-php artisan migrate
 ```
 
 ```
@@ -34,6 +46,4 @@ npm install
 ```
 php artisan serve
 ```
-```
-npm run dev
-```
+
