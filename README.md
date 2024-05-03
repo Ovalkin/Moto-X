@@ -1,49 +1,41 @@
 # Интернет магазин мотоциклов "Moto-X"
-dfldlfdl
-Описание:  
-язык: PHP.  
-фреймворк: Laravel 10.  
 
+## Информация
+
+### Laravel 10.x
+
+### PHP 8.x
+
+### MySql 8.0
+
+#### Для запуска требуется docker, либо настроенный XAMP (в этом случае устанавливаейте сами)
 
 # Для развертывания
 
 ```
 composer install
 ```
+
 ```
 ./vendor/bin/sail up -d
 ```
 
 ## Внутри докер контейнера
+
+```
+chmod o+w ./storage/ -R
+```
+
 ```
 php artisan migrate
 ```
+
 ```
 npm install
 ```
+
 ```
 npm run dev
 ```
 
-```angular2html
-
-```
-```
-php artisan storage:link
-```
-
-```
-php artisan cache:clear
-```
-
-```
-npm config set strict-ssl false
-```
-```
-npm install
-```
-
-```
-php artisan serve
-```
-
+## (Курсовой проект)
