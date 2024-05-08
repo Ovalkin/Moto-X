@@ -26,6 +26,9 @@ composer install
 ```
 chmod o+w ./storage/ -R
 ```
+```
+php artisan storage:link
+```
 
 ```
 php artisan migrate
