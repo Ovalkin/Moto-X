@@ -18,7 +18,7 @@ composer install
 ```
 
 ```
-./vendor/bin/sail up -d
+docker compose up -d
 ```
 
 ## Внутри докер контейнера
@@ -41,5 +41,10 @@ npm install
 ```
 npm run dev
 ```
+
+## После данных манипуляций сайт будет доуступен по адресу 
+http://localhost:80
+## База данных по адресу
+http://localhost:3306
 
 ## (Курсовой проект)
