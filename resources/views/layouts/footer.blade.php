@@ -1,8 +1,11 @@
 <div class="bg-secondary">
     <div class="d-flex justify-content-center gap-5 bg-black">
-        <a href="#">MOTO-X</a>
-        <a href="#">MOTO-X</a>
-        <a href="#">MOTO-X</a>
+        <a href="#" class="text-decoration-none" style="color: white">MOTO-X</a>
+        <a href="#" class="text-decoration-none" style="color: white">MOTO-X</a>
+        <a href="#" class="text-decoration-none" style="color: white">MOTO-X</a>
+        <a href="#" class="text-decoration-none" style="color: white">MOTO-X</a>
+        <a href="#" class="text-decoration-none" style="color: white">MOTO-X</a>
+        <a href="#" class="text-decoration-none" style="color: white">MOTO-X</a>
     </div>
     <div class="container d-flex flex-column">
         <div class="d-flex justify-content-center p-5 gap-5">

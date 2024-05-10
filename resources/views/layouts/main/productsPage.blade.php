@@ -30,7 +30,11 @@
                             <form method="post" action="/basket/addProduct">
                                 @csrf
                                 <input name="product_id" readonly type="hidden" value="{{$product['id']}}">
-                                <input type="submit" class="btn btn-outline-dark w-100 mb-1" value="Добавить в корзину">
+                                @if($product['amount'] != 0)
+                                    <button type="submit" class="btn btn-outline-dark w-100 mb-1">Добавить в корзину</button>
+                                @else
+                                    <h1 class="btn btn-outline-danger w-100 mb-1">Товар закончился</h1>
+                                @endif
                             </form>
                         </div>
                     </div>

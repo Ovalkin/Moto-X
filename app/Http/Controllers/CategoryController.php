@@ -63,7 +63,8 @@ class CategoryController extends Controller
                             'Производитель' => $accessory['producer']
                         ],
                         'price' => $product['price'],
-                        'description' => $product['description']
+                        'description' => $product['description'],
+                        'amount' => $accessory['quantity']
                     ];
                 }
             }
@@ -82,7 +83,8 @@ class CategoryController extends Controller
                             'Класс' => $motorcycle['class']
                         ],
                         'price' => $product['price'],
-                        'description' => $product['description']
+                        'description' => $product['description'],
+                        'amount' => $motorcycle['quantity']
                     ];
                 }
             }
@@ -100,7 +102,8 @@ class CategoryController extends Controller
                             'Размер' => $equipment['size']
                         ],
                         'price' => $product['price'],
-                        'description' => $product['description']
+                        'description' => $product['description'],
+                        'amount' => $equipment['quantity']
                     ];
                 }
             }

@@ -42,6 +42,9 @@
                     <a class="nav-link {{$page == 'edit-product' ? 'active' : '' }}" href="/adminpanel/edit-product">Редактировать
                         товары</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{$page == 'orders' ? 'active' : '' }}" href="/adminpanel/orders">Заказы</a>
+                </li>
             </ul>
         </div>
     </header>
@@ -65,7 +68,10 @@
                     @include('layouts.admin.addAccessory')
                     @break
                 @case('edit-product')
-                @include('layouts.admin.editProduct')
+                    @include('layouts.admin.editProduct')
+                    @break
+                @case('orders')
+                    @include('layouts.admin.orders')
             @endswitch
         </div>
     </main>

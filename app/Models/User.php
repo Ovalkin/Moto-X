@@ -66,17 +66,26 @@ class User extends Model
         return true;
     }
 
-    public function returnUserData(): array|bool
+    public function returnUserData($id = ''): array|bool
     {
-        if (empty($_COOKIE['aut_user'])) return false;
-        $userId = unserialize($_COOKIE['aut_user']);
-
-        $userData = User::query()
-            ->select('*')
-            ->where('id', '=', $userId)
-            ->get()
-            ->toArray();
-        return $userData[0];
+        if ($id == '') {
+            if (empty($_COOKIE['aut_user'])) return false;
+            $userId = unserialize($_COOKIE['aut_user']);
+            $userData = User::query()
+                ->select('*')
+                ->where('id', '=', $userId)
+                ->get()
+                ->toArray();
+            return $userData[0];
+        }
+        else {
+            $userData = User::query()
+                ->select('*')
+                ->where('id', '=', $id)
+                ->get()
+                ->toArray();
+            return $userData[0];
+        }
     }
 
     public function changePass($newPass)
@@ -88,7 +97,7 @@ class User extends Model
         User::query()
             ->where('id', $userId)
             ->update(['password' => $newPass,
-                      'updated_at' => $updatedAt]);
+                'updated_at' => $updatedAt]);
 
         return true;
     }

@@ -49,7 +49,7 @@ class UserController extends Controller
         unset($userdata['_token']);
 
         foreach ($userdata as $value) {
-            if (empty($value)) dd($value);
+            if (empty($value)) return "Некоторые поля пустые";
         }
         if ($userdata['password'] === $userdata['rePassword']) {
             unset($userdata['rePassword']);

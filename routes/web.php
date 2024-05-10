@@ -33,6 +33,7 @@ Route::post('/adminpanel/add-equipment/submit', [AdminController::class, 'addEqu
 Route::post('/adminpanel/add-accessory/submit', [AdminController::class, 'addAccessory']);
 Route::post('/adminpanel/edit-product/edit', [AdminController::class, 'selectProduct']);
 Route::post('/adminpanel/edit-product/edit/submit', [AdminController::class, 'editProduct']);
+Route::post('/adminpanel/orders/submit', [AdminController::class, 'submitOrder']);
 
 Route::get('/basket', [BasketController::class, 'index']);
 Route::post('/basket/make-order', [BasketController::class, 'makeOrder']);

@@ -2,9 +2,13 @@
     @foreach($mainContent as $category=>$products)
             <?php $count = 5 ?>
         @if($products == null)
+            <div class="d-flex w-100 justify-content-center">
             <h1>{{$category}}</h1>
+            </div>
             <div class="row row-cols-1 row-cols-md-5 g-4">
-                <h1>Отсутсвуют</h1>
+                <div class="d-flex w-100 justify-content-center border-bottom">
+                <h1>Товары данной категории отсутсвуют</h1>
+                </div>
                 @else
                     <h1>{{$category}}</h1>
                     <div class="row row-cols-1 row-cols-md-5 g-4">
@@ -38,7 +42,11 @@
                                     <form method="post" action="/basket/addProduct">
                                         @csrf
                                         <input name="product_id" readonly type="hidden" value="{{$product['id']}}">
-                                        <input type="submit" class="btn btn-outline-dark w-100 mb-1" value="Добавить в корзину">
+                                        @if($product['amount'] != 0)
+                                            <button type="submit" class="btn btn-outline-dark w-100 mb-1">Добавить в корзину</button>
+                                        @else
+                                            <h1 class="btn btn-outline-danger w-100 mb-1">Товар закончился</h1>
+                                        @endif
                                     </form>
                                 </div>
                             </div>

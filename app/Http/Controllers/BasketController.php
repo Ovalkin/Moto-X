@@ -71,7 +71,7 @@ class BasketController extends Controller
         $basketData['amount'] = 1;
         $basket = new Basket();
         $basket->add($basketData);
-        dd($basketData);
+        return redirect()->to('/basket');
     }
 
     public function update(Request $request)
@@ -123,6 +123,6 @@ class BasketController extends Controller
         foreach ($orders as $value){
             $order->add($value);
         }
-        dd($orders);
+        return redirect()->to('/orders');
     }
 }

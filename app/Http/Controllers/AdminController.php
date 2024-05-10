@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Accessory;
 use App\Models\Equipment;
 use App\Models\Motorcycle;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,13 +37,40 @@ class AdminController extends Controller
             $categories = new CategoryController();
             $categories = $categories->returnMainContent();
             foreach ($categories as $category) {
-                if($category == null) continue;
+                if ($category == null) continue;
                 foreach ($category as $code) {
                     $products[] = $code;
                 }
             }
             $returnData['products'] = $products;
         }
+
+        if ($page == 'orders'){
+            $orders = array();
+            $ordersData = new Order();
+            $ordersData = $ordersData->getOrders();
+            foreach ($ordersData as $orderData){
+                if ($orderData['status'] == 'На рассмотрении'){
+                $userName = new User;
+                $userName = $userName->returnUserData($orderData['user_id']);
+                $userName = $userName['name'] . ' ' . $userName['surname'] . ' ' . $userName['lastname'];
+
+                $product = new CategoryController();
+                $product = $product->returnOneContent($orderData['product_id'])['name'];
+
+                $orders[] = array(
+                    'id_order' => $orderData['id'],
+                    'id_product' => $orderData['product_id'],
+                    'user_name' => $userName,
+                    'name_product' => $product,
+                    'amount' => $orderData['amount'],
+                    'address' => $orderData['address']
+                );
+                }
+            }
+            $returnData['orders'] = $orders;
+        }
+
         return view('adminpanel', $returnData);
     }
 
@@ -58,7 +86,7 @@ class AdminController extends Controller
         $addProduct = new Product();
         $addProduct->addProduct($productData);
 
-        dd($request);
+        return redirect()->to('/adminpanel/add-product');
     }
 
     public function addMotorcycle(Request $request)
@@ -79,8 +107,7 @@ class AdminController extends Controller
 
         $motorcycle->addMotorcycle($motorcycleData);
 
-
-        dd($motorcycleData);
+        return redirect()->to('/adminpanel/add-motorcycles');
     }
 
     public function addEquipment(Request $request)
@@ -98,7 +125,7 @@ class AdminController extends Controller
         $equipmentData['photo'] = $request->file('photo')
             ->store('/equipment/' . $lastEquipment['id'] + 1, 'public');
         $equipment->addEquipment($equipmentData);
-        dd($equipmentData);
+        return redirect()->to('/adminpanel/add-equipment');
     }
 
     public function addAccessory(Request $request)
@@ -116,7 +143,7 @@ class AdminController extends Controller
         $accessoryData['photo'] = $request->file('photo')
             ->store('/accessory/' . $lastAccessory['id'] + 1, 'public');
         $accessory->addAccessory($accessoryData);
-        dd($accessoryData);
+        return redirect()->to('/adminpanel/add-accessory');
     }
 
     public function selectProduct(Request $request)
@@ -213,8 +240,20 @@ class AdminController extends Controller
             $product->del($productData['idProduct']);
             $category->del($productData['idCategory']);
         }
-
         return redirect()->to('/adminpanel/edit-product');
     }
 
+    public function submitOrder(Request $request){
+        $order = $request->all();
+        unset($order['_token']);
+
+        $orderH = new Order();
+        if($order['submit']){
+            $orderH->acceptOrder($order['id_order'], $order['id_product'], $order['amount']);
+        }
+        else {
+            $orderH->rejectOrder($order['id_order']);
+        }
+        return redirect()->to('/adminpanel/orders');
+    }
 }
