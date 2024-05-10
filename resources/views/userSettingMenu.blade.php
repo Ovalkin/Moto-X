@@ -1,4 +1,4 @@
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" style="min-height: 800px">
     <div class="d-flex justify-content-center">
     <form method="post" action="/setting/changedata" class="w-50">
         @csrf

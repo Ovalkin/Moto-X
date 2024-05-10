@@ -1,4 +1,4 @@
-<div class="container mb-5" style="min-height: 700px">
+<div class="container mb-5" style="min-height: 800px">
     <h1>Корзина</h1>
     <div>{{$countProduct}} товаров</div>
     <br>

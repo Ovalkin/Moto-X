@@ -1,15 +1,15 @@
 <div id="carouselExampleInterval" class="carousel m-0 slide bg-black z-0" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="3500">
-            <img src="{{asset('images/1.jpg')}}" height="300" width="100%"
+            <img src="{{asset('images/1.jpg')}}" height="500" width="100%"
                  class="d-block object-fit-cover" alt="...">
         </div>
         <div class="carousel-item" data-bs-interval="3500">
-            <img src="{{asset('images/2.jpg')}}" height="300" width="100%"
+            <img src="{{asset('images/2.jpg')}}" height="500" width="100%"
                  class="d-block object-fit-cover" alt="...">
         </div>
         <div class="carousel-item" data-bs-interval="3500">
-            <img src="{{asset('images/3.jpg')}}" height="300" width="100%"
+            <img src="{{asset('images/3.jpg')}}" height="500" width="100%"
                  class="d-block object-fit-cover" alt="...">
         </div>
     </div>

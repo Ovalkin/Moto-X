@@ -1,10 +1,10 @@
-<div class="products container mt-2 border-start border-end" style="min-height: 1000px">
+<div class="products container mt-2 border-start border-end" style="min-height: 700px">
     @foreach($mainContent as $category=>$products)
             <?php $count = 5 ?>
         @if($products == null)
             <h1>{{$category}}</h1>
             <div class="row row-cols-1 row-cols-md-5 g-4">
-                <h2>Отсутсвуют</h2>
+                <h1>Отсутсвуют</h1>
                 @else
                     <h1>{{$category}}</h1>
                     <div class="row row-cols-1 row-cols-md-5 g-4">

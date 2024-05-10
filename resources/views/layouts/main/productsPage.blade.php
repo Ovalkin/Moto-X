@@ -1,7 +1,9 @@
-<div class="products container mt-2 border-start border-end" style="min-height: 1000px">
+<div class="products container mt-2 border-start border-end" style="min-height: 700px">
     <div class="row row-cols-1 row-cols-md-5 g-4">
         @if($products == null)
-            <h1>Отсутсвуют</h1>
+            <div class="w-100 d-flex justify-content-center">
+                <h1 class="mt-5">Товары данной категории отсутсвуют</h1>
+            </div>
         @else
             @foreach($products as $name=>$product)
                 <div class="col">

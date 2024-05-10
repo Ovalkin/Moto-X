@@ -19,7 +19,8 @@ class User extends Model
 
     public function signin($signinData)
     {
-        $user = User::query()->select('*')
+        $user = User::query()
+            ->select('*')
             ->where('email', '=', $signinData['email'])
             ->get()
             ->toArray();
@@ -87,7 +88,7 @@ class User extends Model
         User::query()
             ->where('id', $userId)
             ->update(['password' => $newPass,
-                'updated_at' => $updatedAt]);
+                      'updated_at' => $updatedAt]);
 
         return true;
     }

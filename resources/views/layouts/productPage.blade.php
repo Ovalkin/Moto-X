@@ -1,4 +1,4 @@
-<div class="container mt-5" style="min-height: 1000px">
+<div class="container mt-5" style="min-height: 800px">
     <div class="d-flex  justify-content-between">
         <div class="w-50" style="width: 700px">
             <img src="{{asset('storage/'.$products[$code]['photo'])}}" class="d-block" style="width: 690px" alt="...">
@@ -26,11 +26,12 @@
             </div>
         </div>
     </div>
-    <div class="d-flex flex-row mt-5 mb-5">
-        <div class="border w-100">
+    <div class="d-flex flex-row mt-5 mb-5 justify-content-center">
+        <div class="border w-75 p-3">
             <h2>Описание:</h2>
-            <br>
+            <h4>
             {{$products[$code]['description']}}
+            </h4>
         </div>
     </div>
 </div>

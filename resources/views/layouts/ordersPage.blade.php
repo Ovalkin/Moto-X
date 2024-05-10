@@ -1,4 +1,4 @@
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" style="min-height: 700px">
     <ul class="list-group list-group-horizontal">
         <li class="list-group-item flex-fill w-25">Название товара</li>
         <li class="list-group-item flex-fill w-25">Колличество</li>

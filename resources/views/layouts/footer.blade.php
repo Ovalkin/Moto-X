@@ -5,35 +5,10 @@
         <a href="#">MOTO-X</a>
     </div>
     <div class="container d-flex flex-column">
-        <div class="d-flex justify-content-between pt-5">
+        <div class="d-flex justify-content-center p-5 gap-5">
             <div>
-                <h1>MOTO-X</h1>
-                <p>Лучший мото-салон в Челябинске</p>
-            </div>
-            <div>
-                <ul>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                </ul>
-            </div><div>
-                <ul>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                </ul>
-            </div><div>
-                <ul>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                    <li>hdffdfg</li>
-                </ul>
+            <h1>MOTO-X</h1>
+            <h2>Лучший мото-салон в Челябинске</h2>
             </div>
         </div>
     </div>
